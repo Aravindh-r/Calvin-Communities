@@ -6,7 +6,6 @@
   import { DashboardGraphService } from './dashboard-graphs.service';
   import { SocketService } from '../notifications/socket.service';
   import { MdTableModule } from '@angular/material';
-  /*import { GraphSocketService } from './dashboard-graph-socket.service';*/
 
   @Component({
     selector: 'calvin-dashboard-graphs',
@@ -15,22 +14,20 @@
       '../../../node_modules/nvd3/build/nv.d3.css', './dashboard-graphs.component.css'
     ],
     providers : [SocketService],
-    /*providers:[GraphSocketService,DashboardGraphService,],*/
     encapsulation: ViewEncapsulation.None
 
   })
 
   export class DashboardGraphsComponent implements OnInit {
 
-    constructor(/*private GraphSocketService: GraphSocketService,*/ 
+    constructor(
       private socketService:SocketService,
       private GraphService: DashboardGraphService,
       private router: Router, 
       private route: ActivatedRoute,
       ){
     }
-    /*private ioConnection:any;
-    private graghautoupdate: any;*/
+    clearData;
     options;
     purposes;
     data;
@@ -40,41 +37,7 @@
     flager;
     private notifications: any[];
     private ioConnection: any;
-    
 
-    /*private initIoConnection() {
-      console.log('hii');
-            this.ioConnection = this.GraphSocketService.get().subscribe((value) => {
-                this.graghautoupdate.unshift(value);
-        });
-    console.log(this.graghautoupdate.unshift(value),'hii show me'); 
-        // });
-    
-        }*/
-
-    /*  ngOnInit() {
-        console.log('hi socket');
-        if(this.initIoConnection() !== undefined){
-            this.flag = 0;
-        console.log('get data1');
-        this.graghautoupdate;
-            this.initIoConnection();
-        console.log('got data');
-        this.getGraphDetails();
-      }else{
-        this.flag = 0;
-        console.log('get data');
-        this.graghautoupdate;
-            this.initIoConnection();
-        console.log('got data');
-        this.getGraphDetails();
-      }
-    }*/
-    // updateGraphdetails(){
-    //   console.log('welcome to notify update graph');
-    //   this.getGraphDetails();
-    //    this.getGraph(this.count);
-    // }
     ngOnInit() {
       this.flager = 0;
       if(this.initIoConnection() === undefined){
@@ -82,10 +45,6 @@
       }else{
         this.initIoConnection();
       }
-      //this.initIoConnection();
-      // this.updateGraphDetails();
-      
-      //this.getGraphDetails();
     }
    private initIoConnection() {
         this.ioConnection = this.socketService.get().subscribe((newNotification) => {
@@ -93,41 +52,7 @@
            this.getGraphDetails();
      });
 }
-    /*updateGraphDetails(){
-if(this.notifications === null){
-  console.log('.................!!!!!!!!!!!!!!! HI CHECK FOR SOCKET SERVICE',this.ioConnection);
-  this.getGraphDetails();
-}else{
-  console.log('.................!!!!!!!!!!!!!!! HI CHECK FOR SOCKET SERVICE when notification is not null',this.ioConnection); 
-  this.getGraphDetails();
-
-}
-    }*/
-
-     
-
-
-// private initIoConnection() {
-//         this.ioConnection = this.socketService.wsObservable.subscribe();
-//         console.log('.................!!!!!!!!!!!!!!! HI CHECK FOR SOCKET SERVICE',this.ioConnection);
-//         console.log('.................!!!!!!!!!!!!!!! HI CHECK FOR SOCKET SERVICE',this.notifications);
-//     /*      (newNotification) => {
-//             this.notifications.unshift(newNotification);
-//      });*/
-//       }
-/*private initIoConnection(){
-  if(this.socketService.get() === null ){
-    console.log('socket service is undefined');
-    this.getGraphDetails();
-  }
-  else{
-    console.log('socket service is defined',this.socketService.get());
-    this.getGraphDetails();
-  }
-}
-*/
-      getGraphDetails() {  
-        // this.flag=0; 
+      getGraphDetails() {   
         let flag = false;
         let counter = 0;
         this.GraphService.getPurposes()
@@ -158,9 +83,9 @@ if(this.notifications === null){
                 });
                 this.flager = 1; 
                 console.log('......*** caaling getGraph method with count',this.count); 
-                this.getGraph(this.count);            
-                // if (flag) { this.getGraph(this.count); }
-                // if (!flag) { this.getGraph([]); }
+                // this.getGraph(this.count);            
+                if (flag) { this.getGraph(this.count); }
+                if (!flag) { this.getGraph([]); }
               })
           })
       }
@@ -203,6 +128,7 @@ if(this.notifications === null){
             }
           }
         }
+         //this.clearData = function(){this.options = []};
       console.log('final value is : ',this.options);
       }
     }

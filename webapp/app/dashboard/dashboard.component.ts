@@ -7,12 +7,5 @@ import { FlexLayoutModule } from "@angular/flex-layout";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-	/*ngOnInit() {
-	notification(checked:true){
-        
-    }
-  }*/
-  onVoted(agreed: boolean) {
-  	console.log('event emitted');
-  }
+	
 }

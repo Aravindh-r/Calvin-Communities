@@ -41,15 +41,19 @@
     ngOnInit() {
       this.flager = 0;
       if(this.initIoConnection() === undefined){
+        console.log('initIoConnection is undefined');
         this.getGraphDetails();
       }else{
         this.initIoConnection();
       }
     }
    private initIoConnection() {
-        this.ioConnection = this.socketService.get().subscribe((newNotification) => {
+        this.ioConnection = this.socketService.get().subscribe((data) => {
            this.notifications;
-           this.getGraphDetails();
+           console.log('Notification notify',data);
+           if(data['event'] === 'newcommunityadded'){
+              this.getGraphDetails();
+           }
      });
 }
       getGraphDetails() {   
@@ -128,7 +132,7 @@
             }
           }
         }
-         //this.clearData = function(){this.options = []};
+         this.clearData = function(){this.options = [];};
       console.log('final value is : ',this.options);
       }
     }

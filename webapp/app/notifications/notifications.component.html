@@ -11,10 +11,10 @@
     (click)="redirect(message.domain)"> -->
        <!--  <md-card class="notifications" *ngIf="message.event === 'newcommunityadded'" 
     (click)="redirect(message.domain)"> -->
-     <md-card class="notifications" *ngIf="message.event === 'newcommunityadded'" (click)="vote(true)" >
+     <md-card class="notifications" *ngIf="message.event === 'newcommunityadded'" (click)="redirect(message.domain)" >
 
-     <button (click)="vote(true)" [disabled]="voted">Agree</button>
-     <button (click)="vote(false)" [disabled]="voted">Disagree</button>
+     <!-- <button (click)="vote(true)" [disabled]="voted">Agree</button>
+     <button (click)="vote(false)" [disabled]="voted">Disagree</button> -->
       <!-- [vote]="vote(true)" -->
     <p><md-icon>language</md-icon> {{message.domain}} Community is Created </p>
     </md-card>

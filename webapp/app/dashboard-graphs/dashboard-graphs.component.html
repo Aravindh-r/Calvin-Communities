@@ -1,0 +1,21 @@
+<!--<div *ngFor="let sdata of dataArr" >
+  <p>{{sdata.value}}</p>
+</div>-->
+
+<div fxLayout fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div  fxFlex  >
+    <md-card>
+      <md-card-title>Communities</md-card-title>
+      <md-card-subtitle>on the Basis of Purposes</md-card-subtitle>
+      <md-card-content>
+        <nvd3 *ngIf="flager===1" [options]="options" [data]="data" config="{refreshDataOnly: false, deepWatchDataDepth: 0}"></nvd3>
+        <div fxLayoutAlign="center center">
+          <md-progress-spinner *ngIf="flager===0" color="accent" mode="indeterminate">
+          </md-progress-spinner>
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>
+
+

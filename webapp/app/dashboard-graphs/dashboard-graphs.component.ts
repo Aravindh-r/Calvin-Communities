@@ -44,14 +44,16 @@
         console.log('initIoConnection is undefined');
         this.getGraphDetails();
       }else{
+        console.log('hi initIoConnection is defined')
         this.initIoConnection();
       }
     }
    private initIoConnection() {
         this.ioConnection = this.socketService.get().subscribe((data) => {
            this.notifications;
-           console.log('Notification notify',data);
+           //console.log('Notification notify',data);
            if(data['event'] === 'newcommunityadded'){
+             this.count =[];
               this.getGraphDetails();
            }
      });
@@ -71,8 +73,9 @@
                   console.log('*** iterating thriugh puposes.. current is :',purpose);
                   this.domains.forEach((domain) => {
                     if (domain.purpose.toLowerCase() === purpose.toLowerCase()) {
-                      console.log('hi found match... of pupose..',purpose,'...domainpurpose',domain.purpose);
-                      ++counter;
+                      //console.log('hi found match... of pupose..',purpose,'...domainpurpose',domain.purpose);
+                      //console.log('......*** caaling getGraph method with previous count',this.count);
+                      counter++;
                       flag = true;
                     }
                   });
@@ -82,29 +85,23 @@
                   };
 
                   this.count.push(obj);
-                  console.log('hi pushed conetent is *****',obj);
+                  //console.log('hi pushed conetent is *****',obj);
                   counter = 0;
                 });
                 this.flager = 1; 
-                console.log('......*** caaling getGraph method with count',this.count); 
-                // this.getGraph(this.count);            
-                if (flag) { this.getGraph(this.count); }
-                if (!flag) { this.getGraph([]); }
+                //console.log('......*** caaling getGraph method with count',this.count); 
+                // if(this.count['type'] === ){
+
+                 this.getGraph(this.count);            
+                //}
+                // if (flag) { this.getGraph(this.count); }
+                // if (!flag) { this.getGraph([]); }
               })
           })
       }
 
       getGraph(datatext) {
-        const tempArr=[];
-      console.log('inside get graph method with data',datatext);
 
-        datatext.forEach(function (d){
-          console.log("purpose is : ",d.type," value is  ",d.value);
-          tempArr.push(d.value);
-          //console.log("this.dataArr",this.dataArray);
-        });
-        this.data=datatext;
-        console.log('data is ',this.data);
         this.options = {
           chart: {
             type: 'pieChart',
@@ -132,7 +129,19 @@
             }
           }
         }
-         this.clearData = function(){this.options = [];};
-      console.log('final value is : ',this.options);
+      //    const tempArr=[];
+      // console.log('inside get graph method with data',datatext);
+
+      //   datatext.forEach(function (d){
+      //     console.log("purpose is : ",d.type," value is  ",d.value);
+      //     tempArr.push(d.value);
+      //     //console.log("this.dataArr",this.dataArray);
+      //   });
+           //d3.select('svg').html("");
+        this.data=datatext;
+        console.log('data is ',this.data);
+      
+         //this.clearData = function(){this.options = [];};
+      //console.log('final value is : ',this.options);
       }
     }

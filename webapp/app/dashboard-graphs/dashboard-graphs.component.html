@@ -5,9 +5,10 @@
       <md-card-title>Communities</md-card-title>
       <md-card-subtitle>on the Basis of Purposes</md-card-subtitle>
       <md-card-content>
+      
         <nvd3 *ngIf="flager===1" [options]="options" [data]="data"></nvd3>
         <div fxLayoutAlign="center center">
-          <md-progress-spinner *ngIf="flager===0" color="accent" mode="indeterminate">
+          <md-progress-spinner *ngIf="flager===0" color="accent" mode="indeterminate"> 
           </md-progress-spinner>
         </div>
       </md-card-content>
